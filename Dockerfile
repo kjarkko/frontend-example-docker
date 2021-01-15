@@ -8,8 +8,10 @@ RUN apt-get update && apt-get install -y curl && \
     apt install -y nodejs && \
     npm install && \
     apt-get purge -y --auto-remove curl && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    npm run build && \
+    npm install -g serve
 
 ENV PORT=5000
 
-CMD ["npm", "start"]
+CMD serve -s -l $PORT dist
